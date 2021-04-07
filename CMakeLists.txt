@@ -19,6 +19,8 @@ find_package(aws-cpp-sdk-transfer REQUIRED)
 find_package(aws-cpp-sdk-sagemaker REQUIRED)
 find_package(aws-cpp-sdk-sagemaker-edge REQUIRED)
 find_package(gRPC REQUIRED)
+find_package(absl REQUIRED)
+
 
 FILE(GLOB SRC "src/*.cc")
 add_library(foo ${SRC})
@@ -32,3 +34,4 @@ target_link_libraries(foo PRIVATE aws-cpp-sdk-transfer)
 target_link_libraries(foo PRIVATE aws-cpp-sdk-sagemaker)
 target_link_libraries(foo PRIVATE aws-cpp-sdk-sagemaker-edge)
 target_link_libraries(foo PRIVATE gRPC::grpc++)
+target_link_libraries(foo PRIVATE absl::strings)
