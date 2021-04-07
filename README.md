@@ -5,9 +5,15 @@ Third party libraries should be cross-compiled for MIPS uClibc and installed to 
 
 To build the project.
 ```
+mkdir build && cd build
+
 cmake .. \
 -DCMAKE_BUILD_TYPE=Release \
 -DCMAKE_PREFIX_PATH="$HOME/aws-install" \
 -DCMAKE_CXX_COMPILER=mips-linux-uclibc-gnu-g++ \
 -DCMAKE_CXX_FLAGS="-march=mips32r2 -D_GLIBCXX_USE_C99"
+
+make VERBOSE=1
+
+# Result is libfoo.so
 ```

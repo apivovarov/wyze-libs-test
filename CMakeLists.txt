@@ -6,11 +6,18 @@ set(CMAKE_CXX_STANDARD 17)
 OPTION (BUILD_SHARED_LIBS "Build shared libraries." ON)
 OPTION (POSITION_INDEPENDENT_CODE "add -fPIC" ON)
 
+#set(CMAKE_FIND_LIBRARY_SUFFIXES ${CMAKE_STATIC_LIBRARY_SUFFIX})
+
 find_package(nlohmann_json 3.9.1 REQUIRED)
 find_package(spdlog 1.8.1 REQUIRED)
 find_package(CURL 7.73 REQUIRED)
 find_package(OpenSSL REQUIRED)
 find_package(ZLIB REQUIRED)
+find_package(aws-cpp-sdk-core REQUIRED)
+find_package(aws-cpp-sdk-s3 REQUIRED)
+find_package(aws-cpp-sdk-transfer REQUIRED)
+find_package(aws-cpp-sdk-sagemaker REQUIRED)
+find_package(aws-cpp-sdk-sagemaker-edge REQUIRED)
 
 FILE(GLOB SRC "src/*.cc")
 add_library(foo ${SRC})
@@ -19,5 +26,7 @@ target_link_libraries(foo PRIVATE spdlog::spdlog)
 target_link_libraries(foo PRIVATE ${CURL_LIBRARY})
 target_link_libraries(foo PRIVATE OpenSSL::SSL OpenSSL::Crypto)
 target_link_libraries(foo PRIVATE ZLIB::ZLIB)
-
-
+target_link_libraries(foo PRIVATE aws-cpp-sdk-s3)
+target_link_libraries(foo PRIVATE aws-cpp-sdk-transfer)
+target_link_libraries(foo PRIVATE aws-cpp-sdk-sagemaker)
+target_link_libraries(foo PRIVATE aws-cpp-sdk-sagemaker-edge)
