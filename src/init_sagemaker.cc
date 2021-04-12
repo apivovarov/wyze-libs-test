@@ -12,5 +12,6 @@ int init_sagemaker(const char* s3_region, char const* profile) {
         Aws::MakeShared<Aws::Auth::EnvironmentAWSCredentialsProvider>(profile);
   Aws::SageMaker::SageMakerClient sm_client(credentialsProvider, config);
   Aws::SagemakerEdgeManager::SagemakerEdgeManagerClient  sm_edge_client(credentialsProvider, config);
+  std::cout << "aws sagemaker - OK" << std::endl;
   return 0;
 }
