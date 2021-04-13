@@ -55,4 +55,6 @@ aws s3 - OK
 aws transfer - OK
 aws sagemaker - OK
 aws Aws::ShutdownAPI - OK
+GreeterClient created - OK
+Greeter received: Hello world
 ```

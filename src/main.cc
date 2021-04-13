@@ -10,6 +10,9 @@ int close_aws();
 int init_s3(const char* s3_region, const char* TAG);
 int init_transfer();
 int init_sagemaker(const char* s3_region, char const* profile);
+void RunGrpcServer();
+void StopGrpcServer();
+void SendGrpcMessage();
 
 int main() {
   std::vector<int> nums{3, 4, 2, 8, 15, 267};
@@ -27,5 +30,9 @@ int main() {
   init_transfer();
   init_sagemaker("us-west-1", "default");
   close_aws();
+  // Enable Server xor Client (but not two of them together)
+  //RunGrpcServer();
+  SendGrpcMessage();
+  //StopGrpcServer();
   return 0;
 }
