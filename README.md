@@ -39,6 +39,7 @@ wget http://pivovaa-us-west-1.s3.amazonaws.com/wyze/foo
 
 # Run foo
 ./foo
+std::for_each: 3 4 2 8 15 267
 nlohmann::json - OK
 [2021-04-12 15:57:43.219] [info] Welcome to spdlog!
 spdlog - OK
