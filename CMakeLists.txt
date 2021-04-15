@@ -10,23 +10,24 @@ get_filename_component(hw_proto "protos/helloworld.proto" ABSOLUTE)
 get_filename_component(hw_proto_path "${hw_proto}" PATH)
 
 # Generated sources
-set(hw_proto_srcs "${CMAKE_CURRENT_BINARY_DIR}/helloworld.pb.cc")
-set(hw_proto_hdrs "${CMAKE_CURRENT_BINARY_DIR}/helloworld.pb.h")
-set(hw_grpc_srcs "${CMAKE_CURRENT_BINARY_DIR}/helloworld.grpc.pb.cc")
-set(hw_grpc_hdrs "${CMAKE_CURRENT_BINARY_DIR}/helloworld.grpc.pb.h")
+file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/gen)
+set(hw_proto_srcs "${CMAKE_CURRENT_BINARY_DIR}/gen/helloworld.pb.cc")
+set(hw_proto_hdrs "${CMAKE_CURRENT_BINARY_DIR}/gen/helloworld.pb.h")
+set(hw_grpc_srcs "${CMAKE_CURRENT_BINARY_DIR}/gen/helloworld.grpc.pb.cc")
+set(hw_grpc_hdrs "${CMAKE_CURRENT_BINARY_DIR}/gen/helloworld.grpc.pb.h")
 # It should use protoc from $HOME/aws-install/bin/
 add_custom_command(
       OUTPUT "${hw_proto_srcs}" "${hw_proto_hdrs}" "${hw_grpc_srcs}" "${hw_grpc_hdrs}"
       COMMAND ${_PROTOBUF_PROTOC}
-      ARGS --grpc_out "${CMAKE_CURRENT_BINARY_DIR}"
-        --cpp_out "${CMAKE_CURRENT_BINARY_DIR}"
+      ARGS --grpc_out "${CMAKE_CURRENT_BINARY_DIR}/gen"
+        --cpp_out "${CMAKE_CURRENT_BINARY_DIR}/gen"
         -I "${hw_proto_path}"
         --plugin=protoc-gen-grpc="${_GRPC_CPP_PLUGIN_EXECUTABLE}"
         "${hw_proto}"
       DEPENDS "${hw_proto}")
 
 # Include generated *.pb.h files
-include_directories("${CMAKE_CURRENT_BINARY_DIR}")
+include_directories("${CMAKE_CURRENT_BINARY_DIR}/gen")
 
 find_package(nlohmann_json 3.9.1 REQUIRED)
 find_package(spdlog 1.8.1 REQUIRED)
