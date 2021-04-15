@@ -14,6 +14,7 @@ set(hw_proto_srcs "${CMAKE_CURRENT_BINARY_DIR}/helloworld.pb.cc")
 set(hw_proto_hdrs "${CMAKE_CURRENT_BINARY_DIR}/helloworld.pb.h")
 set(hw_grpc_srcs "${CMAKE_CURRENT_BINARY_DIR}/helloworld.grpc.pb.cc")
 set(hw_grpc_hdrs "${CMAKE_CURRENT_BINARY_DIR}/helloworld.grpc.pb.h")
+# It should use protoc from $HOME/aws-install/bin/
 add_custom_command(
       OUTPUT "${hw_proto_srcs}" "${hw_proto_hdrs}" "${hw_grpc_srcs}" "${hw_grpc_hdrs}"
       COMMAND ${_PROTOBUF_PROTOC}
@@ -46,10 +47,7 @@ add_library(hw_grpc_proto
   ${hw_grpc_hdrs}
   ${hw_proto_srcs}
   ${hw_proto_hdrs})
-target_link_libraries(hw_grpc_proto
-  ${_REFLECTION}
-  ${_GRPC_GRPCPP}
-  ${_PROTOBUF_LIBPROTOBUF})
+target_link_libraries(hw_grpc_proto gRPC::grpc++ gRPC::grpc++_reflection)
 
 # foo executalbe
 FILE(GLOB SRC "src/*.cc")
