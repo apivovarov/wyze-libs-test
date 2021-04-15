@@ -16,11 +16,23 @@ find_package(aws-cpp-sdk-sagemaker-edge REQUIRED)
 find_package(gRPC REQUIRED)
 #find_package(absl REQUIRED)
 
+# helloworld protobuf library
+FILE(GLOB SRC_HW_PB "hw_pb/*.cc")
+add_library(hw_pb STATIC ${SRC_HW_PB})
+target_include_directories(hw_pb PRIVATE "hw_pb")
+
+# foo executalbe
 FILE(GLOB SRC "src/*.cc")
 add_executable(foo ${SRC})
 
-target_include_directories(foo PRIVATE "src")
+target_include_directories(foo PRIVATE "hw_pb")
 
+# Linking hw_pb
+target_link_libraries(hw_pb PRIVATE gRPC::grpc++)
+target_link_libraries(hw_pb PRIVATE gRPC::grpc++_reflection)
+
+# Linking foo
+target_link_libraries(foo PRIVATE hw_pb)
 target_link_libraries(foo PRIVATE nlohmann_json::nlohmann_json)
 target_link_libraries(foo PRIVATE spdlog::spdlog)
 #target_link_libraries(foo PRIVATE OpenSSL::SSL OpenSSL::Crypto)
@@ -30,8 +42,5 @@ target_link_libraries(foo PRIVATE aws-cpp-sdk-s3)
 target_link_libraries(foo PRIVATE aws-cpp-sdk-transfer)
 target_link_libraries(foo PRIVATE aws-cpp-sdk-sagemaker)
 target_link_libraries(foo PRIVATE aws-cpp-sdk-sagemaker-edge)
-target_link_libraries(foo PRIVATE gRPC::grpc++)
-target_link_libraries(foo PRIVATE gRPC::grpc++_reflection)
-#target_link_libraries(foo PRIVATE absl::strings)
 target_link_libraries(foo PRIVATE -static-libstdc++)
 target_link_libraries(foo PRIVATE stdc++fs)
