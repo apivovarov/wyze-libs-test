@@ -5,6 +5,7 @@
 int init_common();
 int init_absl();
 int init_curl();
+int init_certinfo();
 int init_aws();
 int close_aws();
 int init_s3(const char* s3_region, const char* TAG);
@@ -25,6 +26,7 @@ int main() {
   init_common();
   init_absl();
   init_curl();
+  init_certinfo();
   init_aws();
   init_s3("us-west-1", "default");
   init_transfer();
