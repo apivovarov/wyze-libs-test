@@ -37,6 +37,12 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/media/mmc/lib
 cd /media/mmc/
 wget http://pivovaa-us-west-1.s3.amazonaws.com/wyze/foo
 
+# Download greeter_server
+wget http://pivovaa-us-west-1.s3.amazonaws.com/wyze/greeter_server
+
+# Run greeter_server in background
+./greeter_server &
+
 # Run foo
 ./foo
 std::for_each: 3 4 2 8 15 267
