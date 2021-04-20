@@ -3,6 +3,7 @@
 #include <iostream>
 
 int init_common();
+int init_dlr();
 int init_absl();
 int init_curl();
 int init_certinfo();
@@ -15,6 +16,7 @@ void RunGrpcServer();
 void StopGrpcServer();
 void SendGrpcMessage();
 
+
 int main() {
   std::vector<int> nums{3, 4, 2, 8, 15, 267};
   auto print = [](const int& n) { std::cout << " " << n; };
@@ -24,6 +26,7 @@ int main() {
   std::cout << '\n';
 
   init_common();
+  init_dlr();
   init_absl();
   init_curl();
   init_certinfo();

@@ -41,6 +41,7 @@ find_package(aws-cpp-sdk-sagemaker REQUIRED)
 find_package(aws-cpp-sdk-sagemaker-edge REQUIRED)
 find_package(gRPC REQUIRED)
 #find_package(absl REQUIRED)
+find_package(dlr 1.8 REQUIRED)
 
 # hw_grpc_proto
 add_library(hw_grpc_proto
@@ -65,5 +66,6 @@ target_link_libraries(foo PRIVATE aws-cpp-sdk-s3)
 target_link_libraries(foo PRIVATE aws-cpp-sdk-transfer)
 target_link_libraries(foo PRIVATE aws-cpp-sdk-sagemaker)
 target_link_libraries(foo PRIVATE aws-cpp-sdk-sagemaker-edge)
+target_link_libraries(foo PRIVATE dlr)
 target_link_libraries(foo PRIVATE -static-libstdc++)
 target_link_libraries(foo PRIVATE stdc++fs)
